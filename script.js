@@ -7,7 +7,7 @@ const getWeatherData = async (location) => {
     const theNameOfTheCity = inputField.value;
     if (theNameOfTheCity.trim()) {
         try{
-            fetch("http://api.weatherapi.com/v1/forecast.json?key=" + API.key + "&q=" + theNameOfTheCity + "&days=7&aqi=no&alerts=no")
+            return fetch("http://api.weatherapi.com/v1/forecast.json?key=" + API.key + "&q=" + theNameOfTheCity + "&days=7&aqi=no&alerts=no")
             .then(response => response.json())
             .then(data => { return data })
         } catch (error) {
