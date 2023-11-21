@@ -13,7 +13,7 @@ const getWeatherData = async (location) => {
         } catch (error) {
             alert("Hey are you sure you are not holding up your map upside down?");
         }
-} else {
+    } else {
         alert("Please, fill the input field");
     }}
 
@@ -89,7 +89,8 @@ const displayInfo = async (data) => {
 }
 
 const startWeatherApp = async () => {
-
+    const weatherInfo = await getWeatherData(inputField.value);
+    displayInfo(weatherInfo);
 }
 
 
