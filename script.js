@@ -6,9 +6,19 @@ const cityNameContainer = document.querySelector('.city-info')
 
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-const getWeatherData = async () => {
-
-}
+const getWeatherData = async (location) => {
+    const theNameOfTheCity = inputField.value;
+    if (theNameOfTheCity.trim()) {
+        try{
+            fetch("http://api.weatherapi.com/v1/forecast.json?key=" + API.key + "&q=" + theNameOfTheCity + "&days=7&aqi=no&alerts=no")
+            .then(response => response.json())
+            .then(data => { return data })
+        } catch (error) {
+            alert("Hey are you sure you are not holding up your map upside down?");
+        }
+} else {
+        alert("Please, fill the input field");
+    }}
 
 const displayInfo = async () => {
 
@@ -25,21 +35,7 @@ const startWeatherApp = async () => {
         // check if the value of the input field is not empty
     if (document.getElementById('cityName').value.trim()) {
         // Make the api call to get the weather Data based on the City
-        fetch("http://api.weatherapi.com/v1/forecast.json?key=" + API.key + "&q=" + theNameOfTheCity + "&days=7&aqi=no&alerts=no")
-        // Transform the response in a readable javascript format
-        .then(response => response.json())
-        // final formatted data from the API call
-        .then(data => {
-            // Check if data is received
-            console.log(data)
-
-
-            // check if the data is not giving back an error
-            if(data.error) {
-                // stop the event from continuing the code if there is an error
-                return alert("Hey are you sure you are not holding up your map upside down?")
-                console.log("check if code stops")
-            } else {
+        else {
                 const container = document.querySelector(".container");
                 container.innerHTML = ""
                 
@@ -136,7 +132,7 @@ const startWeatherApp = async () => {
 })*/
 
 
-button.addEventListener('click', startWeatherApp);
+button.addEventListener('click', getWeatherData);
 inputField.addEventListener('keyup', (e) => {
     if (e.code === "Enter") {
         startWeatherApp();
